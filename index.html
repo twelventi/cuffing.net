@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cuffing.net</title>
-  </head>
+    <link rel="icon" href="logo.png">
+</head>
   <style>
     body {
       width: full;
@@ -15,18 +16,84 @@
       align-items: center;
       justify-content: center;
       text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
     #logo {
-      width: 25%;
-      height: 25%;
+      width: 15%;
+      height: 15%;
+      min-width: 200px;
     }
+
+    h1 {
+      font-weight: normal;
+      letter-spacing: 0.75rem;
+    }
+
+    p {
+      letter-spacing: 0.25rem;
+
+    }
+
+    #form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: full;
+      border-radius: 15px;
+    }
+    #form button {
+      background-color: black;
+      color: white;
+      outline: none;
+      border: none;
+      padding: 7px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+    #form input {
+      outline: none;
+      border: black 1px solid;
+      padding: 6px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
   </style>
+
   <body>
     <div>
       <img src="./logo.png" id="logo" />
       <h1>cuffing.net</h1>
       <p>Coming Soon!</p>
+      <div id="form">
+        <input type="text" id="email" placeholder="Email" />
+        <button id="submit">Submit</button>
+      </div>
     </div>
+    <script defer>
+      document.querySelector("#submit").addEventListener("click", () => {
+        const inputEl = document.querySelector("#email");
+
+        const em = inputEl.value;
+
+        fetch(
+          "https://corsproxy.io/?" +
+            encodeURIComponent(
+              "https://script.google.com/macros/s/AKfycbwn04RAHvNftqAdmPt60lzGvEbhc5moewZeBQjzs2pGNed8T0DzJRBnDmwt1aAuXfRK/exec?gid=937462610&" +
+                new URLSearchParams({
+                  email: em,
+                  time: `${Date.now()}`,
+                })
+            ),
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+
+        inputEl.value = "";
+      });
+    </script>
   </body>
 </html>
